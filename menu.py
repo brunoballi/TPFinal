@@ -228,6 +228,63 @@ Menú del sistema:
                 print("\nNo se encuentra ningun cliente particular que este guardado en el sistema")
                 input("\nPrecione 0 para volver al menu principal")
 
+    def borrar_cliente(self):
+        "Solicita un ID y borra al cliente, en caso de que tenga trabajos pendientes, tambien los borra"
+        b = self.rc.get_all_corporativos()
+        if b:
+
+            print("           Clientes CORPORATIVOS           ")
+            print("-------------------------------------------")
+            for i in b:
+                print("ID cliente: ", i.id_cliente, "- Nombre: ", i.nombre_empresa)
+                print("..................................................")
+        t = self.rc.get_all_particulares()
+        if t:
+            print("""         CLIENTES PARTICULARES""")
+            print("""-----------------------------------------""")
+            for i in t:
+                print("ID cliente: ", i.id_cliente, "- Nombre: ", i.nombre)
+                print("..................................................\n")
+        if b or t:
+            while True:
+                try:
+                    id_cliente = int(input("Ingrese el ID del cliente: "))
+                except ValueError:
+                    print('Debe ingresar un numero')
+                    continue
+                break
+            d = self.list_clientes._buscar_por_id(id_cliente)
+            if d:
+                print("\n..................................................\n")
+                print(d)
+                print("..................................................\n")
+                f = "A"
+                while f not in ("1", "2"):
+                    f = input("""¿Seguro que desea eliminar al cliente? 
+       1:Si Borrar.  / 2: No Borrar. 
+
+       Ingrese una opcion: """)
+                if f in ("1"):
+                    a = self.list_clientes._buscar_por_id(id_cliente)
+                    if a == None:
+                        print("Ocurrio un error al querer borrar al cliente")
+                        print("..................................................")
+                        input("\nPrecione 0 para volver al menu principal")
+                    else:
+                        print("El cliente fue eliminado con exito")
+                        print("..................................................")
+                        input("\nPrecione 0 para volver al menu principal")
+
+                else:
+                    print("\nEl cliente no ha sido eliminado.")
+                    input("\nPrecione 0 para volver al menu principal")
+            else:
+                print("\nEl ID ingresado no pertenece a ningun cliente que este guardado en el sistema")
+                input("\nPrecione 0 para volver al menu principal")
+        else:
+            print("\nActualmente no se encuentra ningun cliente guardado en el sistema")
+            input("\nPrecione 0 para volver al menu principal")
+
     def salir(self):
         """Sale del sistema"""
         print("Gracias por utilizar el sistema.")
