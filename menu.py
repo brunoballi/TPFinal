@@ -26,10 +26,11 @@ class Menu:
             "5": self.borrar_cliente,
             "6": self.nuevo_trabajo,
             "7": self.mostrar_trabajos,
-            "8": self.finalizar_trabajo,
-            "9": self.retirar_trabajo,
-            "10": self.eliminar_trabajo,
-            "11": self.historial_T,
+            "8": self.modificar_datos_trabajo,
+            "9": self.finalizar_trabajo,
+            "10": self.retirar_trabajo,
+            "11": self.eliminar_trabajo,
+            "12": self.historial_T,
 
             "0": self.salir
         }
@@ -50,10 +51,11 @@ Menú del sistema:
 ===================================================
 6. Cargar nuevo trabajo.                                                                          
 7. Mostrar todos los trabajos.
-8. Finalizar un trabajo.
-9. Retirar un trabajo.
-10.Eliminar un trabajo.
-11.Ver Historial de trabajos de cada cliente.
+8. Modificar datos del trabajo.
+9. Finalizar un trabajo.
+10. Retirar un trabajo.
+11.Eliminar un trabajo.
+12.Ver Historial de trabajos de cada cliente.
 ===================================================
 0. Salir del sistema
         """)
@@ -367,6 +369,141 @@ Menú del sistema:
         else:
             print("\nNo se encuentra ningun trabajo cargado en el sistema")
         input("\nPrecione 0 para volver al menu principal")
+
+    def modificar_datos_trabajo(self):
+        "Solicita un ID trabajo y modifica los datos del trabajo"
+        t = self.rt.get_all()
+        if t:
+            for i in t:
+                print("ID trabajo: ", i.id_trabajo)
+                print("Fecha de ingreso: ", i.fecha_ingreso)
+                print("Fecha entrega propuesta: ", i.fecha_entrega_propuesta)
+                print("Descripcion: ", i.descripcion)
+                print(".....................................................\n")
+            while True:
+                try:
+                    id_trabajo = int(input("Ingrese el ID del trabajo: "))
+                except ValueError:
+                    print('Debe ingresar un numero')
+                    continue
+                break
+            C = self.listaTrabajo._buscar_por_id(id_trabajo)
+            if C == None:
+                print("\nEl ID ingresado no pertenece a ningun trabajo guardado en el sistema")
+                input("\nPrecione 0 para volver al menu principal")
+            else:
+                print(C.cliente)
+                print("Trabajo:")
+                print("Fecha de ingreso: ", C.fecha_ingreso)
+                print("Fecha entrega propuesta: ", C.fecha_entrega_propuesta)
+                print("Descripcion: ", C.descripcion)
+                print("Modifique el dato que desea: ")
+                print(".............................................................")
+                tipo = "A"
+                while tipo not in ("1", "2", "3", "4"):
+                    while tipo not in ("4"):
+                        tipo = input("""\n¿Desea hacer alguna modificacion?
+
+       1: Fecha de ingreso / 2: Fecha entrega propuesta / 3: Descripcion / 4: Salir
+
+       Ingrese una opcion: """)
+                        if tipo in ("1"):
+                            print("Modificar fecha de ingreso\n")
+                            while True:
+                                try:
+                                    dia = int(input("Ingrese el numero del dia: "))
+                                except ValueError:
+                                    print('Debe ingresar un numero del 1 al 31')
+                                    continue
+                                break
+                            while True:
+                                try:
+                                    mes = int(input("Ingrese el numero del mes: "))
+                                except ValueError:
+                                    print('Debe ingresar un numero del 1 al 12')
+                                    continue
+                                break
+                            while True:
+                                try:
+                                    anio = int(input("Ingrese el año: "))
+                                except ValueError:
+                                    print('Debe ingresar un numero')
+                                    continue
+                                break
+                            FechaIngreso = date(anio, mes, dia)
+                            t = self.listaTrabajo.modificar_datos_trabajo(FechaIngreso, C.fecha_entrega_real,
+                                                                          C.descripcion,
+                                                                          id_trabajo)
+                            if t == None:
+                                print("Error al modificar el trabajo")
+                                print("..................................................")
+                                input("\nPrecione 0 para volver al menu principal")
+                            else:
+                                print("\n..................................................")
+                                print("Los datos fueron modificados con exito!")
+                                print("..................................................\n")
+                                print(C)
+                                print("..................................................")
+                        if tipo in ("2"):
+                            print("Modificar fecha de entregra propuesta\n")
+                            while True:
+                                try:
+                                    dia = int(input("Ingrese el numero del dia: "))
+                                except ValueError:
+                                    print('Debe ingresar un numero del 1 al 31')
+                                    continue
+                                break
+                            while True:
+                                try:
+                                    mes = int(input("Ingrese el numero del mes: "))
+                                except ValueError:
+                                    print('Debe ingresar un numero del 1 al 12')
+                                    continue
+                                break
+                            while True:
+                                try:
+                                    anio = int(input("Ingrese el año: "))
+                                except ValueError:
+                                    print('Debe ingresar un numero')
+                                    continue
+                                break
+                            FechaEntregaPropuesta = date(anio, mes, dia)
+                            t = self.listaTrabajo.modificar_datos_trabajo(C.fecha_ingreso, FechaEntregaPropuesta,
+                                                                          C.descripcion,
+                                                                          id_trabajo)
+                            if t == None:
+                                print("Error al modificar el trabajo")
+                                print("..................................................")
+                                input("\nPrecione 0 para volver al menu principal")
+                            else:
+                                print("\n..................................................")
+                                print("Los datos fueron modificados con exito!")
+                                print("..................................................\n")
+                                print(C)
+                                print("..................................................")
+                        if tipo in ("3"):
+                            print("..................................................")
+                            print("Modificar la descripcion del trabajo\n")
+                            Descripcion = input("Ingrese la descripcion del trabajo: ")
+                            T = self.listaTrabajo.modificar_datos_trabajo(C.fecha_ingreso, C.fecha_entrega_real,
+                                                                          Descripcion,
+                                                                          id_trabajo)
+                            if T == None:
+                                print("..................................................")
+                                print("Error al modificar el trabajo")
+                                print("..................................................")
+                                input("\nPrecione 0 para volver al menu principal")
+                            else:
+                                print("\n..................................................")
+                                print("Los datos fueron modificados con exito!")
+                                print("..................................................\n")
+                                print(C)
+                                print("..................................................")
+                    if tipo in ("4"):
+                        self.ejecutar()
+        else:
+            print("\nNo se encuentra ningun trabajo cargado en el sistema")
+            input("\nPrecione 0 para volver al menu principal")
 
     def salir(self):
         """Sale del sistema"""
