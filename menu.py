@@ -556,6 +556,62 @@ Menú del sistema:
             print("\nNo se encuentra ningun trabajo que este cargado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
+    def retirar_trabajo(self):
+        "Solicita un ID trabajo y lo marca como retirado"
+        t = self.rt.get_all()
+        if t:
+            for i in t:
+                print("\n.......................................................")
+                print(i.cliente)
+                print("ID trabajo: ", i.id_trabajo, "- Retirado: ", i.retirado)
+                print("........................................................\n")
+            while True:
+                try:
+                    id_trabajo = int(input("Ingrese el ID del trabajo: "))
+                except ValueError:
+                    print('Debe ingresar un numero')
+                    continue
+                break
+            C = self.listaTrabajo._buscar_por_id(id_trabajo)
+            if C == None:
+                print("\nEl ID ingresado no pertenece a ningun trabajo guardado en el sistema")
+                input("\nPrecione 0 para volver al menu principal")
+            else:
+                if C.retirado == True:
+                    print("\nEl trabajo ya se encuentra como retirado")
+                    input("\nPrecione 0 para volver al menu principal")
+                else:
+                    print("\n.....................................................")
+                    print(C)
+                    print(".......................................................")
+                    tipo = "A"
+                    while tipo not in ("1", "2"):
+                        print("\n.....................................................")
+                        tipo = input("""¿Desea dar por retirado el trabajo?
+
+       1: Si Retirar. / 2: No Retirar.
+
+       Ingresa una opcion: """)
+                    if tipo in ("1"):
+                        T = self.listaTrabajo.retiro_trabajo(id_trabajo)
+                        if T == None:
+                            print("Error al retirar el trabajo")
+                            print(".....................................................")
+                            input("\nPrecione 0 para volver al menu principal")
+                        else:
+                            print("El trabajo fue retirado con exito!")
+                            print("...................................................\n")
+                            print(C)
+                            print("\n...................................................")
+                            input("\nPrecione 0 para volver al menu principal")
+                    else:
+                        print("No se realizo modificacion en el retiro del trabajo")
+                        print(".........................................................")
+                        input("\nPrecione 0 para volver al menu principal")
+        else:
+            print("\nNo se encuentra ningun trabajo cargado en el sistema")
+            input("\nPrecione 0 para volver al menu principal")
+
     def salir(self):
         """Sale del sistema"""
         print("Gracias por utilizar el sistema.")
