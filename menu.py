@@ -131,7 +131,7 @@ Menú del sistema:
                 break
             c = self.list_clientes._buscar_por_id(id_cliente)
             if c == None:
-                print("El ID ingresado no pertenece a ningun cliente que este cargado actualmente")
+                print("El ID ingresado no pertenece a ningun cliente que este guardado en el sistema")
             else:
                 print("\n................................................\n")
                 print(c)
@@ -284,7 +284,7 @@ Menú del sistema:
                 print("\nEl ID ingresado no pertenece a ningun cliente que este guardado en el sistema")
                 input("\nPrecione 0 para volver al menu principal")
         else:
-            print("\nNo se encuentra ningun cliente guardado en el sistema")
+            print("\nNo se encuentra ningun cliente que este guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
     def nuevo_trabajo(self):
@@ -356,7 +356,7 @@ Menú del sistema:
                     input("\nPrecione 0 para volver al menu principal")
         else:
             print(
-                "\nNo se encuentra ningun cliente guardado en el sistema")
+                "\nNo se encuentra ningun cliente que este guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
     def mostrar_trabajos(self):
@@ -367,7 +367,7 @@ Menú del sistema:
                 print(Cliente)
                 print("..................................................")
         else:
-            print("\nNo se encuentra ningun trabajo cargado en el sistema")
+            print("\nNo se encuentra ningun trabajo que este guardado en el sistema")
         input("\nPrecione 0 para volver al menu principal")
 
     def modificar_datos_trabajo(self):
@@ -389,7 +389,7 @@ Menú del sistema:
                 break
             C = self.listaTrabajo._buscar_por_id(id_trabajo)
             if C == None:
-                print("\nEl ID ingresado no pertenece a ningun trabajo guardado en el sistema")
+                print("\nEl ID ingresado no pertenece a ningun trabajo que este guardado en el sistema")
                 input("\nPrecione 0 para volver al menu principal")
             else:
                 print(C.cliente)
@@ -502,7 +502,7 @@ Menú del sistema:
                     if tipo in ("4"):
                         self.ejecutar()
         else:
-            print("\nNo se encuentra ningun trabajo cargado en el sistema")
+            print("\nNo se encuentra ningun trabajo que este guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
     def finalizar_trabajo(self):
@@ -574,7 +574,7 @@ Menú del sistema:
                 break
             C = self.listaTrabajo._buscar_por_id(id_trabajo)
             if C == None:
-                print("\nEl ID ingresado no pertenece a ningun trabajo guardado en el sistema")
+                print("\nEl ID ingresado no pertenece a ningun trabajo que este guardado en el sistema")
                 input("\nPrecione 0 para volver al menu principal")
             else:
                 if C.retirado == True:
@@ -609,7 +609,7 @@ Menú del sistema:
                         print(".........................................................")
                         input("\nPrecione 0 para volver al menu principal")
         else:
-            print("\nNo se encuentra ningun trabajo cargado en el sistema")
+            print("\nNo se encuentra ningun trabajo que este guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
     def eliminar_trabajo(self):
@@ -633,7 +633,7 @@ Menú del sistema:
                 break
             C = self.listaTrabajo._buscar_por_id(id_trabajo)
             if C == None:
-                print("\nEl ID ingresado no pertenece a ningun trabajo guardado en el sistema")
+                print("\nEl ID ingresado no pertenece a ningun trabajo que este guardado en el sistema")
                 input("\nPrecione 0 para volver al menu principal")
             else:
                 print("\n.................................................")
@@ -662,7 +662,7 @@ Menú del sistema:
                     print("................................................")
                     input("\nPrecione 0 para volver al menu principal")
         else:
-            print("\nNo se encuentra ningun trabajo cargado en el sistema")
+            print("\nNo se encuentra ningun trabajo que este guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
         # HISTORIAL DE TRABAJOS de cada Cliente:
@@ -693,7 +693,7 @@ Menú del sistema:
                 break
             C = self.list_clientes._buscar_por_id(id)
             if C == None:
-                print("\nEl ID ingresado no pertenece a ningun cliente guardado en el sistema")
+                print("\nEl ID ingresado no pertenece a ningun cliente que este guardado en el sistema")
                 input("\nPrecione 0 para volver al menu principal")
             else:
                 print(C)
@@ -712,15 +712,15 @@ Menú del sistema:
                             print("......................................................")
                     input("\nPrecione 0 para volver al menu principal")
                 else:
-                    print("\nEl cliente no tiene ningun trabajo cargado en el sistema")
+                    print("\nEl cliente no tiene ningun trabajo que este guardado en el sistema")
                     input("\nPrecione 0 para volver al menu principal")
         else:
-            print("\nNo se encuentra ningun cliente cargado en el sistema")
+            print("\nNo se encuentra ningun cliente que este guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
     def salir(self):
         """Sale del sistema"""
-        print("Gracias por utilizar el sistema.")
+        print("¡Gracias por utilizar el sistema!.")
         sys.exit(0)
 
 
