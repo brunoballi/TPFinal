@@ -285,6 +285,78 @@ Menú del sistema:
             print("\nActualmente no se encuentra ningun cliente guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
+    def nuevo_trabajo(self):
+        "Solicita el ID de un cliente y carga los datos de un nuevo trabajo"
+        b = self.rc.get_all_corporativos()
+        if b:
+            print("""         Clientes CORPORATIVOS          """)
+            print("""-------------------------------------------""")
+            for i in b:
+                print("ID cliente: ", i.id_cliente, "- Nombre: ", i.nombre_empresa)
+                print("..................................................")
+        t = self.rc.get_all_particulares()
+        if t:
+            print("""         Clientes PARTICULARES          """)
+            print("""-------------------------------------------""")
+            for i in t:
+                print("ID cliente: ", i.id_cliente, "- Nombre: ", i.nombre)
+                print("..................................................\n")
+        if b or t:
+            while True:
+                try:
+                    id_cliente = int(input("Ingrese el ID del cliente: "))
+                except ValueError:
+                    print('Debe ingresar un numero')
+                    continue
+                break
+            C = self.list_clientes._buscar_por_id(id_cliente)
+            if C == None:
+                print("\nEl ID ingresado no pertenece a ningun cliente que este guardado en el sistema")
+                input("\nPrecione 0 para volver al menu principal")
+            else:
+                fecha_ingreso = date.today()
+                print("\nFecha de ingreso: ", fecha_ingreso)
+                print("\nFecha de entrega propuesta: ")
+                while True:
+                    try:
+                        dia = int(input("Ingrese el numero del dia: "))
+                    except ValueError:
+                        print("Debe ingresar un numero del 1 al 31")
+                        continue
+                    break
+                while True:
+                    try:
+                        mes = int(input("Ingrese el numero del mes: "))
+                    except ValueError:
+                        print("Debe ingresar un numero del 1 al 12")
+                        continue
+                    break
+                while True:
+                    try:
+                        anio = int(input("Ingrese el año: "))
+                    except ValueError:
+                        print("Debe ingresar un numero")
+                        continue
+                    break
+                fecha_entrega_propuesta = date(anio, mes, dia)
+                descripcion = input("\nIngrese descripcion del nuevo trabajo: ")
+                t = self.listaTrabajo.nuevo_trabajo(C, fecha_ingreso, fecha_entrega_propuesta, descripcion)
+                if t == None:
+                    print("Error al cargar el nuevo trabajo")
+                    print("..................................................")
+                    input("\nPrecione 0 para volver al menu principal")
+
+                else:
+                    print("El nuevo trabajo se cargo con exito!\n")
+                    print("-..................................................")
+                    print(t)
+                    print("..................................................\n")
+                    input("\nPrecione 0 para volver al menu principal")
+        else:
+            print(
+                "\nNo se encuentra ningun cliente guardado en el sistema")
+            input("\nPrecione 0 para volver al menu principal")
+
     def salir(self):
         """Sale del sistema"""
         print("Gracias por utilizar el sistema.")
