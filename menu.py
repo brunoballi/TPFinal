@@ -133,7 +133,7 @@ Menú del sistema:
             if c == None:
                 print("El ID ingresado no pertenece a ningun cliente que este cargado actualmente")
             else:
-                print("\n..................................................\n")
+                print("\n................................................\n")
                 print(c)
                 print("..................................................")
             input("\nPrecione 0 para volver al menu principal")
@@ -179,7 +179,7 @@ Menú del sistema:
                             input("\nPrecione 0 para volver al menu principal")
                         else:
                             print("""Los datos fueron modificados con exito""")
-                            print("\n..................................................\n")
+                            print("\n................................................\n")
                             print(cliente)
                             print("..................................................")
                             input("\nPrecione 0 para volver al menu principal")
@@ -219,7 +219,7 @@ Menú del sistema:
                         input("\nPrecione 0 para volver al menu principal")
                     else:
                         print("Los datos fueron modificados con exito")
-                        print("..................................................\n")
+                        print(".................................................\n")
                         print(cliente)
                         print("..................................................")
                         input("\nPrecione 0 para volver al menu principal")
@@ -270,11 +270,11 @@ Menú del sistema:
                     a = self.list_clientes._buscar_por_id(id_cliente)
                     if a == None:
                         print("Ocurrio un error al querer borrar al cliente")
-                        print("..................................................")
+                        print(".................................................")
                         input("\nPrecione 0 para volver al menu principal")
                     else:
                         print("El cliente fue eliminado con exito")
-                        print("..................................................")
+                        print(".................................................")
                         input("\nPrecione 0 para volver al menu principal")
 
                 else:
@@ -295,14 +295,14 @@ Menú del sistema:
             print("""-------------------------------------------""")
             for i in b:
                 print("ID cliente: ", i.id_cliente, "- Nombre: ", i.nombre_empresa)
-                print("..................................................")
+                print("............................................")
         t = self.rc.get_all_particulares()
         if t:
             print("""         Clientes PARTICULARES          """)
             print("""-------------------------------------------""")
             for i in t:
                 print("ID cliente: ", i.id_cliente, "- Nombre: ", i.nombre)
-                print("..................................................\n")
+                print(".............................................\n")
         if b or t:
             while True:
                 try:
@@ -476,9 +476,9 @@ Menú del sistema:
                                 print("..................................................")
                                 input("\nPrecione 0 para volver al menu principal")
                             else:
-                                print("\n..................................................")
+                                print("\n................................................")
                                 print("Los datos fueron modificados con exito!")
-                                print("..................................................\n")
+                                print(".................................................\n")
                                 print(C)
                                 print("..................................................")
                         if tipo in ("3"):
@@ -586,7 +586,7 @@ Menú del sistema:
                     print(".......................................................")
                     tipo = "A"
                     while tipo not in ("1", "2"):
-                        print("\n.....................................................")
+                        print("\n..................................................")
                         tipo = input("""¿Desea dar por retirado el trabajo?
 
        1: Si Retirar. / 2: No Retirar.
