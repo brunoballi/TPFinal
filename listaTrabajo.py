@@ -59,6 +59,14 @@ class ListaTrabajos:
             return self.rt.update(t)
         return None
 
+    def eliminar_trabajo(self, id_trabajo):
+        t = self._buscar_por_id(id_trabajo)
+        if t:
+            self.rt.delete(t)
+            self.listaTrabajo = self.rt.get_all()
+            return True
+        return None
+
 
 
 
