@@ -667,6 +667,57 @@ Menú del sistema:
 
         # HISTORIAL DE TRABAJOS de cada Cliente:
 
+    def historial_T(self):
+        """Solicita un ID y muestra una lista con los trabajos encargados por el cliente"""
+        l = self.rc.get_all_corporativos()
+        if l:
+            print("""         CLIENTES CORPORATIVOS""")
+            for i in l:
+                print("...........................................................")
+                print("ID cliente: ", i.id_cliente, "- Nombre: ", i.nombre_empresa)
+                print("...........................................................")
+        t = self.rc.get_all_particulares()
+        if t:
+            print("""         CLIENTES PARTICULARES""")
+            for i in t:
+                print("............................................................")
+                print("ID cliente: ", i.id_cliente, "- Nombre: ", i.nombre)
+                print("..........................................................\n")
+        if l or t:
+            while True:
+                try:
+                    id = int(input("\nIngrese el ID del cliente: "))
+                except ValueError:
+                    print('Debe ingresar un numero')
+                    continue
+                break
+            C = self.list_clientes._buscar_por_id(id)
+            if C == None:
+                print("\nEl ID ingresado no pertenece a ningun cliente guardado en el sistema")
+                input("\nPrecione 0 para volver al menu principal")
+            else:
+                print(C)
+                print("...............................................................")
+                t = self.listaTrabajo.listaTrabajo
+                if t:
+                    for U in t:
+                        if U.cliente.id_cliente == id:
+                            print("...................................................\n")
+                            print("ID trabajo: ", U.id_trabajo)
+                            print("Fecha de ingreso: ", U.fecha_ingreso)
+                            print("Fecha entrega propuesta: ", U.fecha_entrega_propuesta)
+                            print("Fecha entrega real: ", U.fecha_entrega_real)
+                            print("Descripcion: ", U.descripcion)
+                            print("Retirado: ", U.retirado)
+                            print("......................................................")
+                    input("\nPrecione 0 para volver al menu principal")
+                else:
+                    print("\nEl cliente no tiene ningun trabajo cargado en el sistema")
+                    input("\nPrecione 0 para volver al menu principal")
+        else:
+            print("\nNo se encuentra ningun cliente cargado en el sistema")
+            input("\nPrecione 0 para volver al menu principal")
+
     def salir(self):
         """Sale del sistema"""
         print("Gracias por utilizar el sistema.")
