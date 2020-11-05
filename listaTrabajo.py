@@ -47,6 +47,18 @@ class ListaTrabajos:
             return self.rt.update(t)
         return None
 
+    def retiro_trabajo(self, id_trabajo):
+        """Recibe un trabajo y modifica el trabajo como retirado"""
+        t = self._buscar_por_id(id_trabajo)
+        if t:
+            if t.fecha_entrega_real == None:
+                t.retirado = True
+                self.trabajo_finalizado(id_trabajo)
+            else:
+                t.retirado = True
+            return self.rt.update(t)
+        return None
+
 
 
 
