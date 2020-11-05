@@ -357,6 +357,17 @@ Menú del sistema:
                 "\nNo se encuentra ningun cliente guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
+    def mostrar_trabajos(self):
+        "Muestra una lista con todos los trabajos"
+        Lista = self.rt.get_all()
+        if Lista:
+            for Cliente in Lista:
+                print(Cliente)
+                print("..................................................")
+        else:
+            print("\nNo se encuentra ningun trabajo cargado en el sistema")
+        input("\nPrecione 0 para volver al menu principal")
+
     def salir(self):
         """Sale del sistema"""
         print("Gracias por utilizar el sistema.")
