@@ -53,7 +53,7 @@ Menú del sistema:
 7. Mostrar todos los trabajos.
 8. Modificar datos del trabajo.
 9. Finalizar un trabajo.
-10. Retirar un trabajo.
+10.Retirar un trabajo.
 11.Eliminar un trabajo.
 12.Ver Historial de trabajos de cada cliente.
 ===================================================
@@ -503,6 +503,57 @@ Menú del sistema:
                         self.ejecutar()
         else:
             print("\nNo se encuentra ningun trabajo cargado en el sistema")
+            input("\nPrecione 0 para volver al menu principal")
+
+    def finalizar_trabajo(self):
+        "Solicita un ID trabajo y modifica la fecha de entrega real"
+        t = self.rt.get_all()
+        if t:
+            for i in t:
+                print(i.cliente)
+                print("ID trabajo: ", i.id_trabajo, "- Fecha entrega real: ", i.fecha_entrega_real)
+                print("..................................................")
+            while True:
+                try:
+                    id_trabajo = int(input("Ingrese el ID del trabajo: "))
+                except ValueError:
+                    print('Debe ingresar un numero')
+                    continue
+                break
+            C = self.listaTrabajo._buscar_por_id(id_trabajo)
+            if C == None:
+                print("\nEl ID ingresado no pertenece a ningun trabajo que este guardado en el sistema")
+                input("\nPrecione 0 para volver al menu principal")
+            else:
+                if C.fecha_entrega_real:
+                    print("El estado del trabajo se encuentra como finalizado")
+                    input("\nPrecione 0 para volver al menu principal")
+                else:
+                    print(C)
+                    print("..................................................")
+                    tipo = "A"
+                    while tipo not in ("1", "2"):
+                        tipo = input("""¿Desea finalizar el trabajo?
+       1: Si Finalizar. / 2: No Finalizar.
+
+       Ingresa una opcion: """)
+                    if tipo in ("1"):
+                        t = self.listaTrabajo.trabajo_finalizado(id_trabajo)
+                        if t == None:
+                            print("Error al modificar la entrega del trabajo")
+                            print("..................................................")
+                            input("\nPrecione 0 para volver al menu principal")
+                        else:
+                            print("\nEl trabajo fue finalizado con exito!")
+                            print(C)
+                            print("..................................................")
+                            input("\nPrecione 0 para volver al menu principal")
+                    else:
+                        print("No se realizo modificacion en la finalizacion del trabajo")
+                        print("..................................................\n")
+                        input("\nPrecione 0 para volver al menu principal")
+        else:
+            print("\nNo se encuentra ningun trabajo que este cargado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
     def salir(self):
