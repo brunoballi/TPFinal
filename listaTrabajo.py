@@ -29,6 +29,16 @@ class ListaTrabajos:
                 return (t)
         return None
 
+    def modificar_datos_trabajo(self, fecha_ingreso, fecha_entrega_propuesta, descripcion, id_trabajo):
+        """Recibe un trabajo y modifica sus datos"""
+        t = self._buscar_por_id(id_trabajo)
+        if t:
+            t.fecha_ingreso = fecha_ingreso
+            t.fecha_entrega_propuesta = fecha_entrega_propuesta
+            t.descripcion = descripcion
+            return self.rt.update(t)
+        return None
+
 
 
 
