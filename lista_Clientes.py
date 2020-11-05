@@ -95,6 +95,16 @@ class ListaClientes:
             return self.rc.update(Cc)
         return None
 
+    def eliminar_cliente(self, id_cliente):
+        """"Recibe el ID de un cliente y lo elimina, en caso de contener trabajos, tambien los elimina"""
+        C = self._buscar_por_id(id_cliente)
+        for i in self.rt.get_all():
+            if i.cliente.id_cliente == id_cliente:
+                self.rt.delete(i)
+            self.listaTrabajo = self.rt.get_all()
+        self.rc.delete(C)
+        self.list_clientes = self.rc.get_all()
+        return True
 
 
 
