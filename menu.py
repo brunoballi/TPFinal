@@ -184,7 +184,7 @@ Menú del sistema:
                             print("..................................................")
                             input("\nPrecione 0 para volver al menu principal")
                     else:
-                        print("\nEl ID ingresado no pertenece a ningun cliente corporativo guardado en el sistema")
+                        print("\nEl ID ingresado no pertenece a ningun cliente corporativo que este guardado en el sistema")
                         input("\nPrecione 0 para volver al menu principal")
                 else:
                     print("\nNo se encuentra ningun cliente corporativo que este guardado en el sistema")
