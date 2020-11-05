@@ -39,6 +39,14 @@ class ListaTrabajos:
             return self.rt.update(t)
         return None
 
+    def trabajo_finalizado(self, id_trabajo):
+        """Recibe un trabajo y le modifica la fecha de entrega"""
+        t = self._buscar_por_id(id_trabajo)
+        if t:
+            t.fecha_entrega_real = datetime.date.today()
+            return self.rt.update(t)
+        return None
+
 
 
 
