@@ -8,3 +8,8 @@ class ClienteParticular(Cliente):
         self.apellido = apellido
         super().__init__(telefono, mail, id_cliente)
          
+    def __str__(self):
+        Cadena = f"ID cliente: {self.id_cliente}\n"
+        Cadena += f"{self.nombre} {self.apellido} (Cliente Particular)\n"
+        Cadena += f"Telefono: {self.telefono} - E-mail: {self.mail}\n"
+        return Cadena
