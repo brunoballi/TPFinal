@@ -267,13 +267,13 @@ Menú del sistema:
 
        Ingrese una opcion: """)
                 if f in ("1"):
-                    a = self.list_clientes._buscar_por_id(id_cliente)
+                    a = self.list_clientes.eliminar_cliente(id_cliente)
                     if a == None:
-                        print("Ocurrio un error al querer borrar al cliente")
+                        print("Error al querer borrar al cliente")
                         print(".................................................")
                         input("\nPrecione 0 para volver al menu principal")
                     else:
-                        print("El cliente fue eliminado con exito")
+                        print("El cliente fue eliminado con exito!")
                         print(".................................................")
                         input("\nPrecione 0 para volver al menu principal")
 
@@ -284,7 +284,7 @@ Menú del sistema:
                 print("\nEl ID ingresado no pertenece a ningun cliente que este guardado en el sistema")
                 input("\nPrecione 0 para volver al menu principal")
         else:
-            print("\nActualmente no se encuentra ningun cliente guardado en el sistema")
+            print("\nNo se encuentra ningun cliente guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
     def nuevo_trabajo(self):
