@@ -139,7 +139,95 @@ Menú del sistema:
             print("\nNo se encuentra ningun cliente particular que este guardado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
-   
+    def modificar_datos_clientes(self):
+        "Modificar los datos de un cliente, ya sea cliente corporativo o particular"
+        tipo = "A"
+        while tipo not in ("C", "c", "P", "p"):
+            tipo = input("Ingrese el tipo de Cliente:  C:Corporativo / P:Particular")
+
+        if tipo in ("C", "c"):
+            l = self.rc.get_all_corporativos()
+            if l:
+                print("""         Clientes CORPORATIVOS           """)
+                print("""-----------------------------------------""")
+                for i in l:
+                    print(i)
+                    print("..................................................\n")
+                    while True:
+                        try:
+                            id_cliente = int(input("Ingrese el ID del cliente: "))
+                        except ValueError:
+                            print('Debe ingresar un numero')
+                            continue
+                        break
+                    cliente = self.list_clientes._buscar_por_id(id_cliente)
+                    if cliente:
+                        print(cliente)
+                        print("Modifique el dato que desea: ")
+                        print("..................................................\n")
+                        nombre_empresa = input("Ingrese el nombre de la empresa: ")
+                        nombre_contacto = input("Ingrese el nombre del contacto: ")
+                        telefono_contacto = input("Ingrese el telefono del contacto: ")
+                        telefono = input("Ingrese el telefono: ")
+                        Mail = input("Ingrese el mail: ")
+                        C = self.list_clientes.modificar_datos_CC(nombre_empresa, nombre_contacto, telefono_contacto,
+                                                                  telefono, Mail, id_cliente)
+                        if C == None:
+                            print("Error al modificar los datos del cliente")
+                            input("\nPrecione 0 para volver al menu principal")
+                        else:
+                            print("""Los datos fueron modificados con exito""")
+                            print("\n..................................................\n")
+                            print(cliente)
+                            print("..................................................")
+                            input("\nPrecione 0 para volver al menu principal")
+                    else:
+                        print("\nEl ID ingresado no pertenece a ningun cliente corporativo guardado en el sistema")
+                        input("\nPrecione 0 para volver al menu principal")
+                else:
+                    print("\nNo se encuentra ningun cliente corporativo que este guardado en el sistema")
+                    input("\nPrecione 0 para volver al menu principal")
+        else:
+            l = self.rc.get_all_particulares()
+            if l:
+                print("""         Clientes PARTICULARES            """)
+                print("""------------------------------------------""")
+                for i in l:
+                    print(i)
+                    print("..................................................\n")
+                while True:
+                    try:
+                        id_cliente = int(input("Ingrese el ID del cliente: "))
+                    except ValueError:
+                        print('Debe ingresar un numero')
+                        continue
+                    break
+                cliente = self.list_clientes._buscar_por_id(id_cliente)
+                if cliente:
+                    print(cliente)
+                    print("..................................................\n")
+
+                    Nombre = input("Ingrese el nombre: ")
+                    Apellido = input("Ingrese el apellido: ")
+                    Tel = input("Ingrese el telefono: ")
+                    Mail = input("Ingrese el mail: ")
+                    C = self.list_clientes.modificar_datos_CP(Nombre, Apellido, Tel, Mail, id_cliente)
+                    if C == None:
+                        print("Error al modificar los datos del cliente")
+                        input("\nPrecione 0 para volver al menu principal")
+                    else:
+                        print("Los datos fueron modificados con exito")
+                        print("..................................................\n")
+                        print(cliente)
+                        print("..................................................")
+                        input("\nPrecione 0 para volver al menu principal")
+                else:
+                    print("\nEl ID ingresado no pertenece a ningun cliente particular que este guardado en el sistema")
+                    input("\nPrecione 0 para volver al menu principal")
+            else:
+                print("\nNo se encuentra ningun cliente particular que este guardado en el sistema")
+                input("\nPrecione 0 para volver al menu principal")
+
     def salir(self):
         """Sale del sistema"""
         print("Gracias por utilizar el sistema.")
