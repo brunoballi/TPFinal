@@ -612,6 +612,61 @@ Menú del sistema:
             print("\nNo se encuentra ningun trabajo cargado en el sistema")
             input("\nPrecione 0 para volver al menu principal")
 
+    def eliminar_trabajo(self):
+        "Solicita un ID trabajo y borra un trabajo"
+        t = self.rt.get_all()
+        if t:
+            for i in t:
+                print("ID trabajo: ", i.id_trabajo)
+                print("Fecha de ingreso: ", i.fecha_ingreso)
+                print("Fecha entrega propuesta: ", i.fecha_entrega_propuesta)
+                print("Fecha de entrega real: ", i.fecha_entrega_real)
+                print("Descripcion: ", i.descripcion)
+                print("Retirado: ", i.retirado)
+                print(".......................................................\n")
+            while True:
+                try:
+                    id_trabajo = int(input("Ingrese el ID del trabajo: "))
+                except ValueError:
+                    print('Debe ingresar un numero')
+                    continue
+                break
+            C = self.listaTrabajo._buscar_por_id(id_trabajo)
+            if C == None:
+                print("\nEl ID ingresado no pertenece a ningun trabajo guardado en el sistema")
+                input("\nPrecione 0 para volver al menu principal")
+            else:
+                print("\n.................................................")
+                print(C)
+                print("..................................................\n")
+                tipo = "A"
+                while tipo not in ("1", "2"):
+                    tipo = input("""¿Seguro que desea eliminar el trabajo?
+
+       1: Si Eliminar. / 2: No Eliminar.
+
+       Ingresa una opcion: """)
+                if tipo in ("1"):
+                    t = self.listaTrabajo.eliminar_trabajo(id_trabajo)
+                    if t == None:
+                        print("Error al eliminar el trabajo")
+                        print("...........................................")
+                        input("\nPrecione 0 para volver al menu principal")
+
+                    else:
+                        print("El trabajo fue eliminado con exito!")
+                        print("............................................")
+                        input("\nPrecione 0 para volver al menu principal")
+                else:
+                    print("El trabajo no se ha eliminado")
+                    print("................................................")
+                    input("\nPrecione 0 para volver al menu principal")
+        else:
+            print("\nNo se encuentra ningun trabajo cargado en el sistema")
+            input("\nPrecione 0 para volver al menu principal")
+
+        # HISTORIAL DE TRABAJOS de cada Cliente:
+
     def salir(self):
         """Sale del sistema"""
         print("Gracias por utilizar el sistema.")
